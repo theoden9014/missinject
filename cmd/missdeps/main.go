@@ -1,7 +1,7 @@
 package main
 
 import (
-	"missdeps"
+	"github.com/theoden9014/missdeps"
 	"golang.org/x/tools/go/analysis/singlechecker"
 )
 

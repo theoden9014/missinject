@@ -63,7 +63,6 @@ func run(pass *analysis.Pass) (interface{}, error) {
 					continue
 				}
 
-
 				if _, ok := used[fname]; !ok {
 					pass.Reportf(n.Pos(), "find missing dependency: %v", fname)
 				}

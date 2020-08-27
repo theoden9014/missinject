@@ -3,7 +3,7 @@ package missdeps_test
 import (
 	"testing"
 
-	"missdeps"
+	"github.com/theoden9014/missdeps"
 	"golang.org/x/tools/go/analysis/analysistest"
 )
 

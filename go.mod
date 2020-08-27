@@ -1,4 +1,4 @@
-module missdeps
+module github.com/theoden9014/missdeps
 
 go 1.14
 

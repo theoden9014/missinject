@@ -4,7 +4,8 @@ type itr interface {
 	impl()
 }
 
-type impl struct {}
+type impl struct{}
+
 func (i *impl) impl() {}
 
 type A struct {
@@ -18,14 +19,14 @@ func main() {
 	_ = &A{
 		string: "",
 		String: "",
-		itr: &impl{},
-		Itr: &impl{},
+		itr:    &impl{},
+		Itr:    &impl{},
 	}
 
 	_ = &A{ // want "find missing dependency: itr"
 		string: "",
 		String: "",
-		Itr: &impl{},
+		Itr:    &impl{},
 	}
 
 	_ = &A{}
