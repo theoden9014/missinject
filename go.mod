@@ -1,4 +1,4 @@
-module github.com/theoden9014/missdeps
+module github.com/theoden9014/miss-inject
 
 go 1.14
 
