@@ -1,17 +1,15 @@
-package missdeps
+package missinject
 
 import (
 	"go/ast"
 	"go/types"
-	"unicode"
-
 	"golang.org/x/tools/go/analysis"
 	"golang.org/x/tools/go/analysis/passes/inspect"
 	"golang.org/x/tools/go/ast/inspector"
 )
 
 var Analyzer = &analysis.Analyzer{
-	Name: "missdeps",
+	Name: "miss-injection",
 	Doc:  Doc,
 	Run:  run,
 	Requires: []*analysis.Analyzer{
@@ -19,7 +17,7 @@ var Analyzer = &analysis.Analyzer{
 	},
 }
 
-const Doc = "missdeps is ..."
+const Doc = "miss-injection is ..."
 
 func run(pass *analysis.Pass) (interface{}, error) {
 	inspect := pass.ResultOf[inspect.Analyzer].(*inspector.Inspector)
@@ -51,12 +49,6 @@ func run(pass *analysis.Pass) (interface{}, error) {
 			for i := 0; i < t.NumFields(); i++ {
 				f := t.Field(i)
 				fname := f.Name()
-				if len(fname) != 0 {
-					// skip public fields
-					if unicode.IsUpper(rune(fname[0])) {
-						continue
-					}
-				}
 
 				// skip not type interface
 				if !types.IsInterface(f.Type()) {
@@ -64,7 +56,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 				}
 
 				if _, ok := used[fname]; !ok {
-					pass.Reportf(n.Pos(), "find missing dependency: %v", fname)
+					pass.Reportf(n.Pos(), "find missing inject: %v", fname)
 				}
 			}
 		}

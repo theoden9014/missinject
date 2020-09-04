@@ -16,6 +16,8 @@ type A struct {
 }
 
 func main() {
+	_ = &A{}
+
 	_ = &A{
 		string: "",
 		String: "",
@@ -23,11 +25,13 @@ func main() {
 		Itr:    &impl{},
 	}
 
-	_ = &A{ // want "find missing dependency: itr"
+	_ = &A{ // want "find missing inject: itr"
 		string: "",
 		String: "",
 		Itr:    &impl{},
 	}
 
-	_ = &A{}
+	_ = &A{ // want "find missing inject: itr" "find missing inject: Itr"
+		string: "",
+	}
 }
