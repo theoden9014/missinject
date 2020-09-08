@@ -9,7 +9,7 @@ import (
 )
 
 var Analyzer = &analysis.Analyzer{
-	Name: "miss-injection",
+	Name: "miss-inject",
 	Doc:  Doc,
 	Run:  run,
 	Requires: []*analysis.Analyzer{
@@ -17,7 +17,7 @@ var Analyzer = &analysis.Analyzer{
 	},
 }
 
-const Doc = "miss-injection is ..."
+const Doc = "miss-inject is a Linter to prevent forgetting to inject dependency"
 
 func run(pass *analysis.Pass) (interface{}, error) {
 	inspect := pass.ResultOf[inspect.Analyzer].(*inspector.Inspector)
