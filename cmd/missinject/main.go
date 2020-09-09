@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/theoden9014/miss-inject"
+	"github.com/theoden9014/missinject"
 	"golang.org/x/tools/go/analysis/singlechecker"
 )
 
