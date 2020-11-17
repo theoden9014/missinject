@@ -1,37 +1,37 @@
 package a
 
-type itr interface {
-	impl()
+type Stringer interface {
+	String() string
 }
 
-type impl struct{}
+type iStringer struct{}
 
-func (i *impl) impl() {}
+func (i *iStringer) String() string { return "" }
 
-type A struct {
-	string string
-	String string
-	itr    itr
-	Itr    itr
-}
+func f() {
+	type A struct {
+		string   string
+		String   string
+		stringer Stringer
+		Stringer Stringer
+	}
 
-func main() {
 	_ = &A{}
 
+	_ = &A{"", "", nil, nil}
+
 	_ = &A{
-		string: "",
-		String: "",
-		itr:    &impl{},
-		Itr:    &impl{},
+		stringer: &iStringer{},
+		Stringer: nil,
 	}
 
-	_ = &A{ // want "find missing inject: itr"
-		string: "",
-		String: "",
-		Itr:    &impl{},
+	_ = &A{ // want "find missing inject: stringer"
+		string:   "",
+		String:   "",
+		Stringer: &iStringer{},
 	}
 
-	_ = &A{ // want "find missing inject: itr" "find missing inject: Itr"
+	_ = &A{ // want "find missing inject: stringer" "find missing inject: Stringer"
 		string: "",
 	}
 }
